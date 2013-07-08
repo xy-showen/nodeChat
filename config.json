@@ -1,0 +1,14 @@
+{
+	"mongoDB":
+	{
+		"Pro_mongo":"mongodb://nodejitsu_showen:6i9bv6ted7onj9pcgt3jjvsh0q@ds059887.mongolab.com:59887/nodejitsu_showen_nodejitsudb3147299522",
+	    "mongo_address":"ds059887.mongolab.com",
+	    "mongo_port":59887,
+	    "mongo_user":"nodejitsu_showen",
+	    "mongo_password":"6i9bv6ted7onj9pcgt3jjvsh0q",
+        "mongo_database":"nodejitsu_showen_nodejitsudb3147299522"
+	},
+	"StaticResource":"./",
+	"ChatServerAddress":"showenchatapp.aws.af.cm",
+	"ChatServerPort":"4567"
+}

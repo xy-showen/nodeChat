@@ -1,0 +1,22 @@
+{
+  "name": "showenchatapp",
+  "subdomain": "showenchatapp",
+  "scripts": {
+    "predeploy": "",
+    "postdeploy": "",
+    "start": "index.js"
+  },
+  "engines": {
+    "node": "0.8.x",
+     "npm": "1.2.x"
+  },
+  "version": "0.0.0-25",
+  "dependencies": {
+    "socket.io": "0.9.x",
+    "mustache": "0.7.x",
+    "mongodb": "1.2.x",
+    "formidable": "1.0.x",
+    "ccap":"0.3.8",
+    "log4js":"0.6.6"
+  }
+}

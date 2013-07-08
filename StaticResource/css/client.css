@@ -1,0 +1,185 @@
+@charset "utf-8";
+
+#toolbar {
+/*padding-top: 7px;
+padding-bottom: 7px;*/
+
+position:absolute;
+
+
+	/*浅灰色背景*/
+	background: #CCC;
+
+	/*定位方式：固定位置*/
+	position: fixed;
+
+	/*宽100%*/
+	width: 100%;
+	height: 4%;
+	/*位置坐标*/
+	left: 0;
+	top: 96%;
+
+
+/*兼容IE6的代码*/
+	_position: absolute;
+	_top: expression(offsetParent.scrollTop);
+	_width: expression(offsetParent.clientWidth || "100%");
+}
+#status{
+	float: left;
+    position:relative;
+/*
+    width: 10%;
+	height: 4%;*/
+
+	top: 20%;
+}
+
+#statusLab{
+	float: left;
+    position:relative;
+
+/*    width: 10%;
+	height: 4%;*/
+	top: 20%;
+}
+
+#headLitterImg{
+
+	float: left;
+    position:relative;
+/*    width: 10%;
+	height: 4%;*/
+    left: 4%;
+	top: 20%;
+}
+
+#StatusNickname{
+	float: left;
+    position:relative;
+
+/*    width: 10%;
+	height: 4%;*/
+	left: 4%;
+	top: 20%;
+}
+
+
+#weather{
+
+	float: left;
+    position:relative;
+/*    width: 10%;
+	height: 4%;*/
+      left: 70%;
+	top: 20%;
+}
+
+
+#time{
+
+	float: left;
+    position:relative;
+/*    width: 10%;
+	height: 4%;*/
+    left: 70%;
+	top: 20%;
+}
+
+
+#box {
+	   overflow: auto;
+	   width: 500px;
+	   height: 300px;
+	   border: 1px solid #dcdcdc;
+	   padding:10px;
+	   margin:0 0 10px 0;
+	   font-size:12px;
+	   font-family: Arial, Helvetica, sans-serif;
+      }
+li{background-color:#eee;height:25px;margin-top:2px;}
+
+
+#Fimg {"width:980px;
+          background-color:greenf;
+          position:absolute;
+           z-index:1;}
+
+#userlist {
+	   overflow: auto;
+	   width: 120px;
+	   height: 280px;
+	   border: 1px solid #dcdcdc;
+	   padding:10px;
+	   margin:0 0 10px 0;
+	   font-size:12px;
+	   font-family: Arial, Helvetica, sans-serif;
+      }
+
+			#txtInput {
+				width: auto;
+				height: 35px;
+				line-height: 35px;
+				font-size:14px;
+				border:1px solid #ccc;
+			}
+			.error{
+				box-shadow: 0 0 3px #ff0000;
+			}
+			.button {
+				display: inline-block;
+				outline: none;
+				cursor: pointer;
+				text-align: center;
+				text-decoration: none;
+				font: 14px/100% Arial, Helvetica, sans-serif;
+				padding: .5em 2em .55em;
+				text-shadow: 0 1px 1px rgba(0,0,0,.3);
+				-webkit-border-radius: .5em; 
+				-moz-border-radius: .5em;
+				border-radius: .5em;
+				-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+				-moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+				box-shadow: 0 1px 2px rgba(0,0,0,.2);
+			}
+			.button:hover {
+				text-decoration: none;
+			}
+			.button:active {
+				position: relative;
+				top: 1px;
+			}
+			.orange {
+				color: #fef4e9;
+				border: solid 1px #da7c0c;
+				background: #f78d1d;
+				background: -webkit-gradient(linear, left top, left bottom, from(#faa51a), to(#f47a20));
+				background: -moz-linear-gradient(top,  #faa51a,  #f47a20);
+				filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#faa51a', endColorstr='#f47a20');
+			}
+			.orange:hover {
+				background: #f47c20;
+				background: -webkit-gradient(linear, left top, left bottom, from(#f88e11), to(#f06015));
+				background: -moz-linear-gradient(top,  #f88e11,  #f06015);
+				filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#f88e11', endColorstr='#f06015');
+			}
+			.orange:active {
+				color: #fcd3a5;
+				background: -webkit-gradient(linear, left top, left bottom, from(#f47a20), to(#faa51a));
+				background: -moz-linear-gradient(top,  #f47a20,  #faa51a);
+				filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#f47a20', endColorstr='#faa51a');
+			}
+
+
+
+			.warp { width:1800px; height: 850px; margin: 0 auto; }
+			.box { width: 340px; height: 540px; margin: 20px 0 0 10px; color: #333333; background: #efefef; border-radius: 5px; overflow-y: scroll; }
+			.box-tt { height: 26px; padding: 5px 15px; }
+			.box-tt  h4 { float: left; width: 200px; }
+			.tt-btn { float: right; width: 60px; padding-top: 5px; }
+			.tt-btn a { float: left; width: 22px; height: 22px; margin: 0 4px; text-indent: -9999px; background: url(../style/sprite.png) no-repeat; }
+
+			#a1, .tt-btn .a3 { background-position :-63px -23px; cursor: pointer;}
+			#a2, .tt-btn .a4 { background-position :-123px -23px; cursor: pointer;}
+			input { font-size: 12px;}

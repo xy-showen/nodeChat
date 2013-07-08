@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ <html xmlns="http://www.w3.org/1999/xhtml">
+ <head>
+ <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+ <title>测试</title>
+ <style type="text/css">
+ .classicScrollBox{width:9000px; height:54px; position:absolute; left:0; }
+ .classicScrollBox img{width:804px; height:54px; float:left;}
+ .item1{width:804px; height:54px; overflow:hidden; position:relative;}
+ </style>
+ </head>
+ 
+ <body>
+     <div class = "item1">
+         <div id="classicScrollBox" class = "classicScrollBox">
+             <img src="http://www.google.com.hk/logos/2012/muybridge12-hp-f.jpg" alt="">
+             <img src="http://www.google.com.hk/logos/2012/muybridge12-hp-f.jpg" alt="">
+         </div>
+ </div>
+ <script type="text/javascript">
+   var scrollBox = document.getElementById("classicScrollBox");
+   var num_record = 0;//起止位置计算
+   var num_motion = 1000;//动画执行间隔
+   var num_motionTime = 5;//动画缓动系数
+   window.onload = function(){
+       function scrolls(){
+           scrollBox.style.left = (parseInt(scrollBox.style.left)-67) +'px';
+           num_record += 67;
+           if(num_record == 804){
+               scrollBox.style.left = 0 + 'px';
+             num_record = 0;
+           }
+           num_motionTime = Math.ceil(num_motion/100);
+           if (num_motionTime == 0) {
+                 num_motionTime = 1;
+             }
+             if (num_motion != 40) {
+                 num_motion -= 10*num_motionTime;
+             }
+             setTimeout(scrolls,num_motion);
+         }
+         setTimeout(scrolls,num_motion);
+     }
+ </script>
+</body>
+ </html>

@@ -1,0 +1,191 @@
+<html id='login'>
+    <head>
+     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+
+ <link rel="stylesheet" type="text/css" href="./StaticResource/css/jbox.css">
+<script type="text/javascript" src="./StaticResource/html-js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="./StaticResource/html-js/jquery.form.js"></script>
+<script type="text/javascript" src="./StaticResource/html-js/jquery.jBox-2.3.min.js"></script>
+<script type="text/javascript" src="./StaticResource/html-js/jquery.jBox-zh-CN.js"></script>
+
+ <!--<script src="http://cdn.socket.io/stable/socket.io.js"></script>-->
+  <!--<script src="/socket.io/socket.io.js"></script>-->
+
+
+
+
+<script type="text/javascript"> 
+
+function newGuid()
+{
+    var guid = "";
+    for (var i = 1; i <= 32; i++){
+      var n = Math.floor(Math.random()*16.0).toString(16);
+      guid +=   n;
+      if((i==8)||(i==12)||(i==16)||(i==20))
+        guid += "-";
+    }
+    return guid;    
+}
+
+
+
+var Guid=newGuid();
+
+function getVerifyImage()
+{
+  document.getElementById("getVerifyImage").src="getVerifyImage?Guid="+Guid;
+  //alert(Guid);
+}
+
+  $(document).ready(function(){ 
+   document.getElementById('user').focus();
+   document.getElementById("getVerifyImage").src="getVerifyImage?Guid="+Guid;
+
+   $("#refresh").click(function()
+    {
+       getVerifyImage();
+    });
+
+
+   $.getJSON('../../config.json',function(config){
+    $("#checklogin").click(function(){ 
+
+        if(document.getElementById('user').value==""
+            ||document.getElementById('password').value=="")
+        {
+         $("#con").html("账号、密码不能为空"); 
+         document.getElementById('user').focus();
+         return;
+        }
+
+          //ajax方法： 
+          $.ajax({
+                url:"/check", //config.ChatServerAddress+
+                type:"POST", 
+                async:true,
+                data:{'username':document.getElementById('user').value
+                      ,'password':document.getElementById('password').value
+                      ,'VerifyImageCodeKey':Guid
+                      ,"VerifyImageCode":document.getElementById('VerifyImageCode').value},
+                beforeSend:function(XMLHttpRequest){
+                    $("#loading").html("<img src="+config.StaticResource+"StaticResource/load.jpg small='0'>");
+
+                 },
+                success:function(data,status) 
+                {
+                    if(data==="1")
+                    {
+                        $("#con").html("密码错误"); 
+                            //document.getElementById('user').value="";
+                            document.getElementById('password').value="";
+                            $("#loading").html("");
+                            document.getElementById('password').focus();
+                            getVerifyImage();
+                        }
+                        else if(data==="2")
+                        {
+                            $("#con").css("background","#ccc");
+                            $("#con").html("没有此账号");
+                            document.getElementById('user').value="";
+                            document.getElementById('password').value="";
+                            $("#loading").html("");
+                            document.getElementById('user').focus();
+                            getVerifyImage();
+                        }
+                        else if(data==="3")
+                        {
+                            $("#con").html("用户已在线"); 
+                            //document.getElementById('user').value="";
+                            //document.getElementById('password').value="";
+                            $("#loading").html("");
+                             document.getElementById('user').focus();
+                             getVerifyImage();
+                        }
+                        else if(data==="4")
+                        {
+                             $("#con").html("验证码出错"); 
+                            $("#loading").html("");
+                             document.getElementById('user').focus();
+                             getVerifyImage();
+                        }
+                    else
+                        {
+                            $('#body').html(data);
+                            //window.Location.assign(data);
+                        }
+                    //alert(data); 
+                } ,
+            error: function(request) {
+                    alert("服务器异常。");
+                }
+
+            });
+
+        });
+    });
+         window.onload = function(){
+                document.body.onkeypress = function(event){
+                    var ee = window.event || event;
+                    if(ee.keyCode==13){
+                        checklogin.click();
+                    }
+                }
+            }
+    });
+</script>
+
+
+
+      <title>
+        用户登录
+      </title>
+    </head>
+
+    <body id='body'>
+
+    <table border="0" align="center" style="font-size:13px;">  
+        <tr>  
+            <td align="center" colspan="2" style="font-size:8px;" hight="200">
+                <div id="con"></div>
+            </td>  
+        </tr>  
+        <tr>  
+            <td align="right" height="30">用户名：</td>
+            <td><input type="text" name="user" id="user" class="text" /></td> 
+            <iframe src="http://m.weather.com.cn/m/pn6/weather.htm?id=101230101T " width="1400" height="20" marginwidth="0" marginheight="0" hspace="0" vspace="0" frameborder="0" scrolling="no" style="margin-left:-28px;_margin-left:-32px; float:right; display:inline;">
+             </iframe> 
+        </tr>  
+        <tr>  
+            <td align="right" height="30">密码：</td>
+            <td><input type="password" name="password" id="password" class="text" /></td>  
+        </tr>  
+        <tr>  
+  
+        </tr>
+        <tr>
+            <td align="center" colspan="2">
+               <img id="getVerifyImage"/>
+           </td>
+           <td colspan="2">
+            <input id="VerifyImageCode" type="text" maxlength="6" style="width:60"/>
+            </td>
+            <td>
+              <input id="refresh" type="button" value="换一张">
+            </td>
+               <td align="center" colspan="2">
+               <input type="button" id="checklogin" value="登录" /> 
+             </td>
+          </tr>
+       <tr>
+        <td align="center" colspan="2">
+            <div id="loading"></div>
+        </td>
+    </tr>
+    </table>  
+
+
+
+         <!-- <embed wmode="transparent" src="http://chabudai.sakura.ne.jp/blogparts/honehoneclock/honehone_clock_tr.swf" quality="high" bgcolor="#ffffff" width="160" height="70" name="honehoneclock" align="middle" allowscriptaccess="always" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer"> -->
+    </body>  
+</html>

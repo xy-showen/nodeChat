@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<title>Clinet</title>
+		<meta name="description" content="" />
+		<meta name="author" content="showen" />
+		<!-- <meta name="viewport" content="width=device-width; initial-scale=1.0" /> -->
+		<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
+		<link rel="shortcut icon" href="/favicon.ico" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+        <link rel="stylesheet" type="text/css" href="./StaticResource/css/client.css">
+
+		<link rel="stylesheet" type="text/css" href="./StaticResource/css/jbox.css">
+		<script type="text/javascript" src="./StaticResource/html-js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="./StaticResource/html-js/jquery.form.js"></script>
+    <script type="text/javascript" src="./StaticResource/html-js/jquery.jBox-2.3.min.js"></script>
+    <script type="text/javascript" src="./StaticResource/html-js/jquery.jBox-zh-CN.js"></script>
+    
+        <script src="/socket.io/socket.io.js"></script>
+        <script type="text/javascript" src="./StaticResource/html-js/uploadfile.js"></script>
+        <script type="text/javascript" src="./StaticResource/html-js/ConSocket.js"></script>
+        <script type="text/javascript" src="./StaticResource/html-js/userList.js"></script>
+  
+
+		<script type="text/javascript">
+
+	fileUpLoad({
+    submitBtn: $('#uploadimg'),
+    complete: function(response){ //上传成功后处理回调
+        var d = response;
+        document.getElementById("headImg").src="show?username="+document.getElementById("username").value+"&t="+Math.random();
+    },
+    beforeUpLoad: function() {
+       // alert('上传前');
+    },
+    afterUpLoad: function() {
+        //alert('上传后');
+    }
+});
+
+
+
+          
+
+
+
+		</script>
+	</head>
+	<body>
+<!-- 		<h2>简单的聊天室(当前在线：{{nickname}})</h2> -->
+
+		<hr/>
+		  
+        <table>
+        <tr>
+             <div id="toolbar">
+             	<div id="statusLab">
+             	   <label>状态：</label>
+                </div>
+                <div  id="status">
+             	   <label>loading...</label>
+                </div>
+
+                <div id="headLitterImg">
+                   <img src='/show?username={{username}}'  height="20" width="20" />
+                 </div>
+
+                <div  id="StatusNickname">
+                   <label>用户昵称：{{nickname}}</label>
+                </div>
+
+               
+               <div id="weather">
+             	    <iframe src="http://m.weather.com.cn/m/pn6/weather.htm?id=101230101T " width="140" height="20"    marginwidth="0" marginheight="0" hspace="0" vspace="20" frameborder="0" scrolling="no" style="margin-left:-28px;_margin-left:-32px; float:right; display:inline;">
+             	    </iframe>   
+               </div>
+                <div id="time">
+             	    <embed wmode="transparent" src="http://chabudai.sakura.ne.jp/blogparts/honehoneclock/honehone_clock_tr.swf" quality="high" bgcolor="#ffffff   " width="100" height="30" name="honehoneclock" align="right" allowscriptaccess="always" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer">
+             	</div>
+
+             </div>
+
+		    <td>
+		    	<div id='box' ></div>
+		    </td>
+		    <td>
+              <table>
+		    	 <tr>
+                  <td>
+                  	<fieldset>
+                         <legend>聊天室成员</legend>
+                          <div id="userlist">
+                           <ul id="uList" tpye='circle'>
+
+                           </ul>  
+                          </div>
+                    </fieldset>      
+                  </td>    
+
+
+		    	  <td>
+		    	  	 <div id="Fimg" class="img" >
+		    	  	 <img id="s" src="" height="0" width="0"/>
+		    	  	</div>
+		    	  	<fieldset>
+                         <legend>用户头像</legend>
+		    	      <form id="imgForm" action="./upload" enctype="multipart/form-data" method="post">
+		    	      	<table  height="100" width="100">
+		    	      	<tr>
+		    	      	   <td>
+		  	                  <img id="headImg" src='/show?username={{username}}'  height="100" width="100" />
+		  	               </td>
+		  	            </tr>
+		  	            <tr>
+		  	            	<td>
+		  	                 <input type='hidden' id='nickname' value={{nickname}} width ='100'>
+		  	                </td>
+		  	                <td>
+		  	                 <input type='hidden' id='username' name="username" value={{username}} width ='100'>
+		  	                </td>
+		  	                <td>
+		  	                 <input type='hidden' id='uid' value={{uid}} width ='100'>
+		  	                </td>
+                        </tr>
+                        <tr>
+                        	<td>
+                             <input type="file" name="upload" accept="image/jpeg"/> 
+                            </td>
+                        </tr>
+                        <tr>
+                        	<td>
+                              <input id="uploadimg" type="submit" target="" value="上传">
+                            </td>
+
+                        </tr>
+                        </table>
+                        </form>
+                    </fieldset>
+                 </td>
+                  
+                </tr>
+		       </table>
+		   </td>
+		</tr>
+		<tr>
+		    <td>
+		      <input type='text' placeholder="请输入内容" id='txtInput' >
+		      <input type='button' class="button orange" value='发送'  onclick='sendMsg()'>
+		    </td>
+		    <td>
+		      <div id="output"></div>
+		    </td>
+		</tr>     
+
+		 <tr>
+		 	<td>
+		   <!--    <embed wmode="transparent" src="http://chabudai.sakura.ne.jp/blogparts/honehoneclock/honehone_clock_tr.swf" quality="high" bgcolor="#ffffff   " width="160" height="70" name="honehoneclock" align="middle" allowscriptaccess="always" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer"> -->
+		    </td>
+		 </tr>
+		 </table>
+	</body>
+</html>
